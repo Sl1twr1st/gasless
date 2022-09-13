@@ -1,7 +1,21 @@
-import '../styles/globals.css'
+import { ThirdwebProvider, ChainId } from "@thirdweb-dev/react";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <ThirdwebProvider
+      sdkOptions={{
+        gasless: {
+          openzeppelin: {
+            relayerUrl: process.env.NEXT_PUBLIC_OPENZEPPELIN_URL,
+          },
+        },
+      }}
+      desiredChainId={ChainId.Goerli}
+    >
+      <Component {...pageProps} />
+    </ThirdwebProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
